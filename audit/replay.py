@@ -13,12 +13,19 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import sys
 
 from rich.console import Console
 from rich.table import Table
 
 from common.db import db_conn, replay_events
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except AttributeError:
+        pass
 
 RISK_COLOR = {"low": "green", "med": "yellow", "high": "red"}
 
